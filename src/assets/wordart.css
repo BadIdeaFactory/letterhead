@@ -14,7 +14,7 @@ __      _____  ___ ___   _   ___ _____
 .wordart {
   position: relative;
   z-index: 1;
-  display: block;
+  display: inline-block;
   transform-origin: left top;
 }
 .rainbow {
