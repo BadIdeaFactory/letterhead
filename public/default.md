@@ -17,7 +17,9 @@ I'm happy to double click the warm intro to our Chief Technology Official, shoul
 
 Yours truly,
 
-![Wordart signature](/louhuang_wordart_signature.png)
+%%%superhero
+Lou Huang
+%%%
 
 Lou Huang
 Intermind, Bad Idea Factory
