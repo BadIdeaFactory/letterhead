@@ -13,6 +13,15 @@ export default {
       type: String
     }
   },
+  methods: {
+    wordArtReplacer: function(match, type, blank, text) {
+      return `
+          <div class="wordart ${type || "superhero"}">
+              <span class="text" data-text="${text}">${text}</span>
+          </div>
+        `.trim();
+    },
+  },
   computed: {
     parsedMarkdown: function () {
       marked.setOptions({
@@ -21,13 +30,18 @@ export default {
         smartypants: true,
       })
 
+      // Replaces blocks denoted with %%% with the HTML for WordArt
+      const wordArtRule = /%%%(([^%])+\n|)([^%]+)%%%/g;
+      const content = this.content.replace(wordArtRule, this.wordArtReplacer);
+
       // DOMPurify prevents people from typing in custom HTML etc
       // Also prevent some Markdown things that don't belong on the record,
       // like links and images (maybe we support images later some other way)
-      const html = DOMPurify.sanitize(marked(this.content), {
+      const html = DOMPurify.sanitize(marked(content), {
         ALLOWED_TAGS: [
           'b', 'i', 'em', 'strong', 'h1', 'h2', 'h3', 'h4', 'h5',
-          'h6', 'br', 'p', 'del', 'ul', 'li', 'blockquote', 'img'
+          'h6', 'br', 'p', 'del', 'ul', 'li', 'blockquote', 'img',
+          'span', 'div'
         ]
       })
 
@@ -45,6 +59,8 @@ export default {
 
 <!-- not scoped because the elements we want to style are dynamically generated -->
 <style>
+@import "../assets/wordart.css";
+
 .content del {
   position: relative;
   background-color: black;
@@ -71,5 +87,11 @@ export default {
 .content i, .content em {
   font-style: normal;
   text-decoration: underline;
+}
+
+.wordart .text {
+  display: block;
+  font-size: 3em !important;
+  line-height: 1.75em;
 }
 </style>
