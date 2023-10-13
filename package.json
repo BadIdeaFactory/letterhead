@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@biffud/random-bg-color": "1.2.0",
-    "@kangc/v-md-editor": "1.5.7",
+    "@kangc/v-md-editor": "1.6.5",
     "core-js": "^3.33.0",
     "dompurify": "^3.0.6",
     "jspdf": "^2.5.1",
