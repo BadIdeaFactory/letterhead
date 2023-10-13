@@ -10,21 +10,21 @@
   },
   "dependencies": {
     "@biffud/random-bg-color": "1.2.0",
-    "@kangc/v-md-editor": "1.4.10",
-    "core-js": "^3.6.5",
-    "dompurify": "^2.0.15",
-    "jspdf": "^2.1.1",
-    "marked": "^1.1.1",
-    "vue": "^2.6.11"
+    "@kangc/v-md-editor": "1.7.11",
+    "core-js": "^3.33.0",
+    "dompurify": "^2.4.7",
+    "jspdf": "^2.5.1",
+    "marked": "^1.2.9",
+    "vue": "^2.7.14"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-plugin-babel": "~4.5.19",
+    "@vue/cli-plugin-eslint": "~4.5.19",
+    "@vue/cli-service": "~4.5.19",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
     "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.7.14"
   },
   "eslintConfig": {
     "root": true,
