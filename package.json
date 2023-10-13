@@ -14,7 +14,7 @@
     "core-js": "^3.33.0",
     "dompurify": "^3.0.6",
     "jspdf": "^2.5.1",
-    "marked": "^3.0.8",
+    "marked": "^4.3.0",
     "vue": "^2.7.14"
   },
   "devDependencies": {
