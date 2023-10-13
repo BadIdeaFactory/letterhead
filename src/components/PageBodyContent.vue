@@ -68,7 +68,7 @@ export default {
   /* Non-standard preservation of background colors for redaction,
     should work in most newer browsers, but not in IE */
   --webkit-print-color-adjust: exact;
-  color-adjust: exact;
+  print-color-adjust: exact;
   user-select: none;
 }
 
