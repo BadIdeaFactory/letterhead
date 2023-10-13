@@ -7,25 +7,25 @@
       <button @click="handlePrint">Print</button>
       <!-- button @click="handleExportPDF">Export PDF (beta)</button -->
     </div>
-    <Page :content="content"></Page>
+    <PageBody :content="content"></PageBody>
     <footer>
       A <a href="https://biffud.com" target="_blank" rel="noreferer noopener">Bad Idea Factory</a> indulgence.
       <span><a href="https://github.com/badideafactory/letterhead/" target="_blank" rel="noreferer noopener">Source code</a></span>
     </footer>
-    <Editor
+    <ContentEditor
       :key="content"
       :isActive="isEditorActive"
       v-on:update:isEditorActive="isEditorActive = $event"
       :content="content"
       v-on:update:content="content = $event"
-    ></Editor>
+    ></ContentEditor>
   </main>
 </template>
 
 <script>
 import { jsPDF } from 'jspdf'
-import Page from './components/Page'
-import Editor from './components/Editor'
+import PageBody from './components/PageBody'
+import ContentEditor from './components/ContentEditor'
 
 const LETTER_WIDTH_72DPI = 612 // pixels
 
@@ -37,8 +37,8 @@ function calculateHTMLScale (el) {
 export default {
   name: 'App',
   components: {
-    Page,
-    Editor,
+    PageBody,
+    ContentEditor,
   },
   data() {
     return {
