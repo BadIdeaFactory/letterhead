@@ -1,7 +1,7 @@
 <template>
   <div class="paper" id="page">
     <div class="contents">
-      <Header />
+      <LetterHeader />
       <div class="body">
         <PageBodyContent :content="content"></PageBodyContent>
       </div>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Header from './Header'
+import LetterHeader from './LetterHeader'
 import PageBodyContent from './PageBodyContent'
 
 export default {
@@ -35,7 +35,7 @@ export default {
     },
   },
   components: {
-    Header,
+    LetterHeader,
     PageBodyContent,
   },
 }

@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import marked from 'marked'
+import { marked } from 'marked'
+import { markedSmartypants } from 'marked-smartypants'
 import DOMPurify from 'dompurify'
 
 export default {
@@ -26,9 +27,9 @@ export default {
     parsedMarkdown: function () {
       marked.setOptions({
         breaks: true,
-        headerIds: false,
-        smartypants: true,
       })
+
+      marked.use(markedSmartypants())
 
       // Replaces blocks denoted with %%% with the HTML for WordArt
       const wordArtRule = /%%%(([^%])+\n|)([^%]+)%%%/g;
@@ -68,7 +69,7 @@ export default {
   /* Non-standard preservation of background colors for redaction,
     should work in most newer browsers, but not in IE */
   --webkit-print-color-adjust: exact;
-  color-adjust: exact;
+  print-color-adjust: exact;
   user-select: none;
 }
 
