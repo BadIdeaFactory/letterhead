@@ -2,21 +2,21 @@
 
 ## Project setup
 ```
-npm install
+pnpm install
 ```
 
 ### Starts the development server
 ```
-npm run serve
+pnpm run serve
 ```
 
 ### Builds for production
 ```
-npm run build
+pnpm run build
 ```
 
 ### Lints files
 ```
-npm run lint
+pnpm run lint
 ```
 
