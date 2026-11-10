@@ -2,23 +2,21 @@
 
 ## Project setup
 ```
-npm install
+pnpm install
 ```
 
-### Compiles and hot-reloads for development
+### Starts the development server
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+pnpm run serve
 ```
 
-### Lints and fixes files
+### Builds for production
 ```
-npm run lint
+pnpm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Lints files
+```
+pnpm run lint
+```
+
