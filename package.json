@@ -28,7 +28,6 @@
     "eslint": "10.14.0",
     "eslint-plugin-vue": "10.12.1",
     "globals": "17.14.0",
-    "terser": "5.44.1",
     "vite": "8.3.7",
     "vue-eslint-parser": "10.4.2"
   },
