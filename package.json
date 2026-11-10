@@ -18,7 +18,7 @@
     "@biffud/random-bg-color": "1.4.0",
     "dompurify": "3.4.17",
     "jspdf": "4.2.1",
-    "marked": "9.1.6",
+    "marked": "18.2.0",
     "marked-smartypants": "1.1.12",
     "vue": "3.5.45"
   },

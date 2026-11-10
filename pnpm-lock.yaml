@@ -176,11 +176,11 @@ importers:
         specifier: 4.2.1
         version: 4.2.1
       marked:
-        specifier: 9.1.6
-        version: 9.1.6
+        specifier: 18.2.0
+        version: 18.2.0
       marked-smartypants:
         specifier: 1.1.12
-        version: 1.1.12(marked@9.1.6)
+        version: 1.1.12(marked@18.2.0)
       vue:
         specifier: 3.5.45
         version: 3.5.45
@@ -813,9 +813,9 @@ packages:
     peerDependencies:
       marked: '>=4 <19'
 
-  marked@9.1.6:
-    resolution: {integrity: sha512-jcByLnIFkd5gSXZmjNvS1TlmRhCXZjIzHYlaGkPlLIekG55JDR2Z4va9tZwCiP+/RDERiNhMOFu01xd6O5ct1Q==}
-    engines: {node: '>= 16'}
+  marked@18.2.0:
+    resolution: {integrity: sha512-KaeL+tAbtvI930q7HE2PN5lYXYdT8EiSmxHlN6F3rsfb57wd5mp5W5TLazpdj4inTQBJdgjYwbs40W/0VUGU+Q==}
+    engines: {node: '>= 20'}
     hasBin: true
 
   minimatch@10.2.6:
@@ -1593,12 +1593,12 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  marked-smartypants@1.1.12(marked@9.1.6):
+  marked-smartypants@1.1.12(marked@18.2.0):
     dependencies:
-      marked: 9.1.6
+      marked: 18.2.0
       smartypants: 0.2.2
 
-  marked@9.1.6: {}
+  marked@18.2.0: {}
 
   minimatch@10.2.6:
     dependencies:

@@ -3,9 +3,13 @@
 </template>
 
 <script>
-import { marked } from 'marked'
+import { Marked } from 'marked'
 import { markedSmartypants } from 'marked-smartypants'
 import DOMPurify from 'dompurify'
+
+const markdown = new Marked()
+markdown.setOptions({ breaks: true })
+markdown.use(markedSmartypants())
 
 export default {
   props: {
@@ -25,12 +29,6 @@ export default {
   },
   computed: {
     parsedMarkdown: function () {
-      marked.setOptions({
-        breaks: true,
-      })
-
-      marked.use(markedSmartypants())
-
       // Replaces blocks denoted with %%% with the HTML for WordArt
       const wordArtRule = /%%%(([^%])+\n|)([^%]+)%%%/g;
       const content = this.content.replace(wordArtRule, this.wordArtReplacer);
@@ -38,7 +36,7 @@ export default {
       // DOMPurify prevents people from typing in custom HTML etc
       // Also prevent some Markdown things that don't belong on the record,
       // like links and images (maybe we support images later some other way)
-      const html = DOMPurify.sanitize(marked(content), {
+      const html = DOMPurify.sanitize(markdown.parse(content), {
         ALLOWED_TAGS: [
           'b', 'i', 'em', 'strong', 'h1', 'h2', 'h3', 'h4', 'h5',
           'h6', 'br', 'p', 'del', 'ul', 'li', 'blockquote', 'img',
