@@ -4,12 +4,10 @@
       <h2>Content editor</h2>
       <p>Use <a href="https://www.markdownguide.org/basic-syntax" target="_blank" rel="noopener noreferer">Markdown syntax</a> to write text.</p>
       <div class="body">
-        <v-md-editor
+        <textarea
           v-model="editedContent"
-          mode="edit"
-          left-toolbar="h bold italic strikethrough quote | ul ol hr | image"
-          right-toolbar="undo redo clear fullscreen"
-          height="500px"
+          aria-label="Markdown content"
+          rows="20"
         />
       </div>
       <div class="controls">
@@ -101,7 +99,11 @@ export default {
   flex-grow: 1;
 }
 
-.v-md-editor {
+textarea {
+  width: 100%;
+  height: 500px;
+  resize: vertical;
+  font: inherit;
   box-shadow: none;
   border: 1px solid #ddd;
 }
@@ -112,16 +114,3 @@ button {
 }
 </style>
 
-<style>
-.v-md-editor__tooltip {
-  font-family: Helvetica;
-  font-size: 13px;
-  padding: 0.75em 1em;
-  background-color: rgba(0,0,0,.75);
-}
-
-/* Override v-md-editor's word-break override */
-.v-md-editor .codemirror-wrapper .CodeMirror pre {
-  word-break: normal !important;
-}
-</style>
