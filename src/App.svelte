@@ -29,7 +29,8 @@
         doc.save()
       },
       html2canvas: {
-        scale: calculateHTMLScale(el)
+        scale: calculateHTMLScale(el),
+        ignoreElements: (element) => element.matches('.milkdown-toolbar, .milkdown-block-handle, .milkdown-slash-menu, .milkdown-link-preview, .milkdown-link-edit')
       }
     })
   }
@@ -104,7 +105,7 @@
     margin: 0 auto;
   }
 
-  :global(button) {
+  .controls button {
     appearance: none;
     border: 1px solid #f0f0f0;
     border-radius: 3px;
@@ -118,15 +119,15 @@
     font-size: inherit;
   }
 
-  :global(button:last-child) {
+  .controls button:last-child {
     margin-right: 0;
   }
 
-  :global(button:hover) {
+  .controls button:hover {
     background-color: rgba(0, 0, 0, 0.05);
   }
 
-  :global(body[data-dark-mode="false"]) button {
+  :global(body[data-dark-mode="false"]) .controls button {
     color: #333;
     border: 1px solid #333;
   }

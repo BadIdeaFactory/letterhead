@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@biffud/random-bg-color": "1.4.0",
+    "@milkdown/crepe": "7.23.0",
     "@milkdown/kit": "^7.23.0",
     "jspdf": "4.2.1",
     "svelte": "5.57.3"

@@ -57,7 +57,7 @@
 
   .body {
     flex-grow: 1;
-    overflow: hidden;
+    min-height: 0;
     font-family: var(--letter-font);
     color: black;
   }

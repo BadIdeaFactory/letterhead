@@ -1,11 +1,16 @@
 <script>
   import { onMount } from 'svelte'
-  import { Editor, defaultValueCtx, editorViewOptionsCtx, rootCtx } from '@milkdown/kit/core'
-  import { commonmark } from '@milkdown/kit/preset/commonmark'
-  import { gfm } from '@milkdown/kit/preset/gfm'
-  import { history } from '@milkdown/kit/plugin/history'
+  import { CrepeBuilder } from '@milkdown/crepe/builder'
+  import { blockEdit } from '@milkdown/crepe/feature/block-edit'
+  import { linkTooltip } from '@milkdown/crepe/feature/link-tooltip'
+  import { toolbar } from '@milkdown/crepe/feature/toolbar'
+  import { editorViewOptionsCtx } from '@milkdown/kit/core'
   import { $nodeSchema as nodeSchema, $remark as remark } from '@milkdown/kit/utils'
   import '@milkdown/kit/prose/view/style/prosemirror.css'
+  import '@milkdown/crepe/theme/frame.css'
+  import '@milkdown/crepe/theme/common/block-edit.css'
+  import '@milkdown/crepe/theme/common/link-tooltip.css'
+  import '@milkdown/crepe/theme/common/toolbar.css'
 
   let { content = '' } = $props()
   let root
@@ -53,10 +58,12 @@
 
   onMount(() => {
     let disposed = false
-    const editor = Editor.make()
+    const crepe = new CrepeBuilder({ root, defaultValue: content })
+      .addFeature(blockEdit, { advancedGroup: null, listGroup: { taskList: null } })
+      .addFeature(linkTooltip)
+      .addFeature(toolbar)
+    const editor = crepe.editor
       .config((ctx) => {
-        ctx.set(rootCtx, root)
-        ctx.set(defaultValueCtx, content)
         ctx.update(editorViewOptionsCtx, (options) => ({
           ...options,
           attributes: { 'aria-label': 'Letter body', role: 'textbox', 'aria-multiline': 'true' },
@@ -79,19 +86,16 @@
           }
         }))
       })
-      .use(commonmark)
-      .use(gfm)
-      .use(history)
       .use(wordArt)
       .use(remarkWordArt)
 
-    editor.create().then(() => {
-      if (disposed) editor.destroy()
+    crepe.create().then(() => {
+      if (disposed) crepe.destroy()
     })
 
     return () => {
       disposed = true
-      if (editor.status === 'Created') editor.destroy()
+      if (editor.status === 'Created') crepe.destroy()
     }
   })
 </script>
@@ -105,16 +109,22 @@
     height: 100%;
   }
 
-  :global(.content .milkdown),
+  :global(.content .milkdown) {
+    height: 100%;
+    position: relative;
+    --crepe-font-default: var(--body-font);
+  }
+
   :global(.content .ProseMirror) {
-    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 
   :global(.content .ProseMirror) {
     outline: none;
   }
 
-  :global(.content del) {
+  :global(.content .ProseMirror del) {
     position: relative;
     background-color: black;
     color: transparent;
@@ -123,15 +133,15 @@
     user-select: none;
   }
 
-  :global(.content h1) {
+  :global(.content .ProseMirror h1) {
     font-size: 1.75em;
   }
 
-  :global(.content h2),
-  :global(.content h3),
-  :global(.content h4),
-  :global(.content h5),
-  :global(.content h6) {
+  :global(.content .ProseMirror h2),
+  :global(.content .ProseMirror h3),
+  :global(.content .ProseMirror h4),
+  :global(.content .ProseMirror h5),
+  :global(.content .ProseMirror h6) {
     font-size: 1em;
     font-weight: normal;
     margin-top: 2em;
@@ -139,8 +149,8 @@
     text-decoration: underline;
   }
 
-  :global(.content i),
-  :global(.content em) {
+  :global(.content .ProseMirror i),
+  :global(.content .ProseMirror em) {
     font-style: normal;
     text-decoration: underline;
   }
@@ -149,5 +159,36 @@
     display: block;
     font-size: 3em !important;
     line-height: 1.75em;
+  }
+
+  :global(.milkdown-toolbar button),
+  :global(.milkdown-block-handle button) {
+    border: 0;
+    margin: 0;
+    background: transparent;
+  }
+
+  :global(.milkdown-slash-menu ul),
+  :global(.milkdown-slash-menu h6) {
+    margin: 0;
+    padding: 0;
+  }
+
+  :global(.milkdown-slash-menu) {
+    max-width: min(320px, 90vw);
+  }
+
+  :global(.milkdown .milkdown-slash-menu .menu-groups) {
+    max-height: min(420px, calc(50vh - 60px));
+  }
+
+  @media print {
+    :global(.milkdown-toolbar),
+    :global(.milkdown-block-handle),
+    :global(.milkdown-slash-menu),
+    :global(.milkdown-link-preview),
+    :global(.milkdown-link-edit) {
+      display: none !important;
+    }
   }
 </style>
