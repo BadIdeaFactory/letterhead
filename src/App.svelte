@@ -2,11 +2,11 @@
   import { onMount } from 'svelte'
   import { jsPDF } from 'jspdf'
   import PageBody from './components/PageBody.svelte'
-  import ContentEditor from './components/ContentEditor.svelte'
 
   const LETTER_WIDTH_72DPI = 612
   let content = $state('')
-  let isEditorActive = $state(false)
+  let isLoaded = $state(false)
+  let editorVersion = $state(0)
 
   function calculateHTMLScale(el) {
     const srcwidth = el.scrollWidth
@@ -16,6 +16,7 @@
   function handleClear() {
     if (window.confirm('Are you sure you want to clear this document?')) {
       content = ''
+      editorVersion += 1
     }
   }
 
@@ -34,35 +35,34 @@
   }
 
   onMount(async () => {
-    const response = await fetch('/default.md')
-    content = await response.text()
+    try {
+      const response = await fetch('/default.md')
+      if (!response.ok) throw new Error(`Failed to load default letter: ${response.status}`)
+      content = await response.text()
+    } catch (error) {
+      console.error(error)
+    } finally {
+      isLoaded = true
+    }
   })
 </script>
 
 <main class="container">
   <h1>Bad Idea Factory: Letterhead Template <sup class="beta">beta</sup></h1>
   <div class="controls">
-    <button onclick={() => (isEditorActive = true)}>Edit</button>
-    <button onclick={handleClear}>Clear</button>
+    <button onclick={handleClear} disabled={!isLoaded}>Clear</button>
     <button onclick={() => window.print()}>Print</button>
-    <button onclick={handleExportPDF}>Export PDF (beta)</button>
+    <button onclick={handleExportPDF} disabled={!isLoaded}>Export PDF (beta)</button>
   </div>
-  <PageBody {content} />
+  {#if isLoaded}
+    {#key editorVersion}
+      <PageBody {content} />
+    {/key}
+  {/if}
   <footer>
     A <a href="https://biffud.com" target="_blank" rel="noreferer noopener">Bad Idea Factory</a> indulgence.
     <span><a href="https://github.com/badideafactory/letterhead/" target="_blank" rel="noreferer noopener">Source code</a></span>
   </footer>
-  {#key content}
-    <ContentEditor
-      {content}
-      isActive={isEditorActive}
-      onCancel={() => (isEditorActive = false)}
-      onConfirm={(nextContent) => {
-        content = nextContent
-        isEditorActive = false
-      }}
-    />
-  {/key}
 </main>
 
 <style>
