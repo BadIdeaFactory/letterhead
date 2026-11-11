@@ -19,7 +19,6 @@
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
   function handleExportPDF() {
     const doc = new jsPDF()
     const el = document.getElementById('page')
@@ -46,7 +45,7 @@
     <button onclick={() => (isEditorActive = true)}>Edit</button>
     <button onclick={handleClear}>Clear</button>
     <button onclick={() => window.print()}>Print</button>
-    <!-- <button onclick={handleExportPDF}>Export PDF (beta)</button> -->
+    <button onclick={handleExportPDF}>Export PDF (beta)</button>
   </div>
   <PageBody {content} />
   <footer>
