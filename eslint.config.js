@@ -1,5 +1,5 @@
 import js from '@eslint/js'
-import vue from 'eslint-plugin-vue'
+import svelte from 'eslint-plugin-svelte'
 import globals from 'globals'
 
 export default [
@@ -8,11 +8,11 @@ export default [
   },
   {
     ...js.configs.recommended,
-    files: ['src/**/*.{js,vue}']
+    files: ['src/**/*.{js,svelte}']
   },
-  ...vue.configs['flat/essential'],
+  ...svelte.configs['flat/recommended'],
   {
-    files: ['src/**/*.{js,vue}'],
+    files: ['src/**/*.{js,svelte}'],
     languageOptions: {
       globals: {
         ...globals.browser,
