@@ -105,7 +105,7 @@
     margin: 0 auto;
   }
 
-  button {
+  :global(button) {
     appearance: none;
     border: 1px solid #f0f0f0;
     border-radius: 3px;
@@ -119,11 +119,11 @@
     font-size: inherit;
   }
 
-  button:last-child {
+  :global(button:last-child) {
     margin-right: 0;
   }
 
-  button:hover {
+  :global(button:hover) {
     background-color: rgba(0, 0, 0, 0.05);
   }
 
